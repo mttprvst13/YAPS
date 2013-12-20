@@ -20,12 +20,12 @@ import org.bukkit.inventory.meta.ItemMeta;
  *
  * @author Daniel
  */
-public class CdscCommands extends Util implements CommandExecutor {
+public class Commands extends Util implements CommandExecutor {
      
     private String[] args;
     private final String MsgHr = "&e-----------------------------------------------------";
     
-    public CdscCommands(Yaps plugin) {
+    public Commands(Yaps plugin) {
         super(plugin);
     }
 
