@@ -143,9 +143,11 @@ public class PlayerListener extends Util implements Listener {
     }
     
     public boolean isValidMove(Area area,Player player) {
+        
+        if(area.getFlags().contains("AllowMoveInside")) return true;
+        
         return isAllowed(area,player);
     }
-    
     
     public boolean isAllowed(Area area,Player player){
         return area.getOwner().equals(player.getName());

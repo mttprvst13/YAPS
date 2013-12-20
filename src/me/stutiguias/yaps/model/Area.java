@@ -4,9 +4,7 @@
  */
 package me.stutiguias.yaps.model;
 
-import me.stutiguias.yaps.init.Yaps;
 import org.bukkit.Location;
-import org.bukkit.entity.Player;
 
 /**
  *

@@ -199,7 +199,7 @@ public class Commands extends Util implements CommandExecutor {
         SendMessage(MsgHr);
         
         if(plugin.hasPermission(sender.getName(),"yaps.define")){
-            SendMessage("&6/yaps <d or define> <areaName> <clanTag> &e| &7Save Select area");
+            SendMessage("&6/yaps <d or define> <areaName> &e| &7Save Select area");
         }
         
         if(plugin.hasPermission(sender.getName(),"yaps.wand")){
@@ -283,7 +283,7 @@ public class Commands extends Util implements CommandExecutor {
         
         String flag = "";
         
-        //if(!Yaps.config.ClanOwnerCanBreakArea) flag += ",denyclanbreak";
+        if(Yaps.config.AllowMoveInside) flag += "AllowMoveInside";
         
         Location FirstSpot = Yaps.AreaCreating.get((Player)sender).getFirstSpot();
         Location SecondSpot = Yaps.AreaCreating.get((Player)sender).getSecondSpot();

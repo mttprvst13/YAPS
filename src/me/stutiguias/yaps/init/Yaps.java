@@ -22,7 +22,6 @@ import net.milkbowl.vault.permission.Permission;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -39,8 +38,6 @@ public class Yaps extends JavaPlugin {
     public static HashMap<String,YAPSPlayer> PlayerProfiles;
     
     public static List<Area> Areas;
-    
-    public static HashMap<Player,List<ItemStack>> InventorySave;
     
     public Permission permission = null;
     public Economy economy = null;
@@ -66,9 +63,7 @@ public class Yaps extends JavaPlugin {
         AreaCreating = new HashMap<>();
         PlayerProfiles = new HashMap<>();
         config = new Config(this);
-        
-        InventorySave = new HashMap<>();
-        
+
         PluginManager pm = getServer().getPluginManager();
         
         pm.registerEvents(playerListener, this);

@@ -19,6 +19,8 @@ public class Config {
     
     private ConfigAccessor config;
         
+    public boolean AllowMoveInside;
+    
     public boolean UpdaterNotify;
     
     public String DataBaseType;
@@ -49,7 +51,9 @@ public class Config {
             Database = fc.getString("MySQL.Database");
             
             UpdaterNotify = fc.getBoolean("UpdaterNotify");
-
+            
+            AllowMoveInside = fc.getBoolean("AllowMoveInside");
+            
         }catch(IOException ex){
             ex.printStackTrace();
             plugin.getLogger().log(Level.WARNING, "Erro Loading Config");

@@ -13,3 +13,5 @@ MySQL:
   Database: minecraft
 # Enable update
 UpdaterNotify: true
+#Defaults Flags
+AllowMoveInside: true
