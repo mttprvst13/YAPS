@@ -34,6 +34,7 @@ public class SqliteDataQueries extends Queries {
                     Yaps.logger.log(Level.SEVERE, "{0} Exception getting SQLite WALConnection", plugin.prefix);
                     Yaps.logger.warning(e.getMessage());
             }
+            initTables();
             return null;
     }
 	
@@ -59,8 +60,11 @@ public class SqliteDataQueries extends Queries {
         return exists;
     }
 
+    /**
+     *
+     */
     @Override
-    public void initTables() {
+    public final void initTables() {
                 File dbFile = new File(plugin.getDataFolder() + File.separator +  "data.db");
                 if(!dbFile.exists()) {
                     try {

@@ -77,7 +77,6 @@ public class Yaps extends JavaPlugin {
         }else{
             db = new SqliteDataQueries(this);
         }
-        db.initTables();
         
         Areas = db.getAreas();
         

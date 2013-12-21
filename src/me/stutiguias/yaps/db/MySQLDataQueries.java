@@ -21,6 +21,7 @@ public class MySQLDataQueries extends Queries {
                         Yaps.logger.log(Level.WARNING, "{0} Exception getting mySQL WALConnection", plugin.prefix);
 			Yaps.logger.warning(e.getMessage());
                 }
+                initTables();
 	}
 
         @Override
@@ -56,7 +57,7 @@ public class MySQLDataQueries extends Queries {
 	}
 
         @Override
-	public void initTables() {
+	public final void initTables() {
 		if (!tableExists("YAPS_Players")) {
 			Yaps.logger.log(Level.INFO, "{0} Creating table YAPS_Players", plugin.prefix);
 			executeRawSQL("CREATE TABLE YAPS_Players (id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(id), name VARCHAR(255), banned INT);");
