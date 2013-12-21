@@ -3,7 +3,7 @@ version: ${project.version}
 author: "Stutiguias"
 main: "me.stutiguias.yaps.init.Yaps"
 commands:
-  cd:
+  yaps:
     description: "§bcommands"
 permissions:
      yaps.update:

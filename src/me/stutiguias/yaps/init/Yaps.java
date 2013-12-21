@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import me.stutiguias.yaps.commands.Commands;
+import me.stutiguias.yaps.commands.YAPSCommands;
 import me.stutiguias.yaps.configs.Config;
 import me.stutiguias.yaps.db.IDataQueries;
 import me.stutiguias.yaps.db.MySQLDataQueries;
@@ -99,7 +99,7 @@ public class Yaps extends JavaPlugin {
             link = updater.getLatestFileLink(); // Get the latest link
         }
         
-        getCommand("yaps").setExecutor(new Commands(this));
+        getCommand("yaps").setExecutor(new YAPSCommands(this));
     }
 
     @Override

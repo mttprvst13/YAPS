@@ -32,7 +32,7 @@ public class PlayerListener extends Util implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
  
-        if(Yaps.config.UpdaterNotify && plugin.hasPermission(player,"cdsc.update") && Yaps.update)
+        if(Yaps.config.UpdaterNotify && plugin.hasPermission(player,"yaps.update") && Yaps.update)
         {
           SendMessage(player,"&6An update is available: " + Yaps.name + ", a " + Yaps.type + " for " + Yaps.version + " available at " + Yaps.link);
           SendMessage(player,"&6Type /cd update if you would like to automatically update.");
@@ -48,7 +48,7 @@ public class PlayerListener extends Util implements Listener {
         Player player = (Player)event.getPlayer();
         
         if(!isValidEvent(player, location,"place")) {
-            if(plugin.hasPermission(player,"cdsc.bypass")) return;
+            if(plugin.hasPermission(player,"yaps.bypass")) return;
             event.setCancelled(true);
         }
     }
@@ -61,7 +61,7 @@ public class PlayerListener extends Util implements Listener {
         Player player = (Player)event.getPlayer();
         
         if(!isValidEvent(player, location,"break")) {
-            if(plugin.hasPermission(player,"cdsc.bypass")) return;
+            if(plugin.hasPermission(player,"yaps.bypass")) return;
             event.setCancelled(true);
         }
         
@@ -73,7 +73,7 @@ public class PlayerListener extends Util implements Listener {
         Location location = event.getTo();
 
         if(!isValidEvent(player, location,"move")) {
-            if(plugin.hasPermission(player,"cdsc.bypass")) return;
+            if(plugin.hasPermission(player,"yaps.bypass")) return;
             Area area = plugin.getArea(location);
             if(area == null || area.getExit() == null) {
                 Location tpTo = event.getFrom();

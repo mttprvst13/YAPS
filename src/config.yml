@@ -14,4 +14,5 @@ MySQL:
 # Enable update
 UpdaterNotify: true
 #Defaults Flags
+# if allow all player to move inside area of others players
 AllowMoveInside: true
