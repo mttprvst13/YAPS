@@ -20,6 +20,7 @@ public class SqliteDataQueries extends Queries {
 
     public SqliteDataQueries(Yaps plugin) {
         super(plugin);
+        initTables();
     }
 
     @Override
@@ -34,7 +35,6 @@ public class SqliteDataQueries extends Queries {
                     Yaps.logger.log(Level.SEVERE, "{0} Exception getting SQLite WALConnection", plugin.prefix);
                     Yaps.logger.warning(e.getMessage());
             }
-            initTables();
             return null;
     }
 	
