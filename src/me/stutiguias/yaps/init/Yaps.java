@@ -15,6 +15,7 @@ import me.stutiguias.yaps.listener.PlayerListener;
 import me.stutiguias.yaps.listener.SignListener;
 import me.stutiguias.yaps.metrics.Metrics;
 import me.stutiguias.yaps.model.Area;
+import me.stutiguias.yaps.model.BlockProtected;
 import me.stutiguias.yaps.model.YAPSPlayer;
 import me.stutiguias.yaps.updater.Updater;
 import net.milkbowl.vault.economy.Economy;
@@ -38,6 +39,8 @@ public class Yaps extends JavaPlugin {
     public static HashMap<String,YAPSPlayer> PlayerProfiles;
     
     public static List<Area> Areas;
+    
+    public static HashMap<Location,BlockProtected> Protected;
     
     public Permission permission = null;
     public Economy economy = null;
@@ -63,7 +66,8 @@ public class Yaps extends JavaPlugin {
         AreaCreating = new HashMap<>();
         PlayerProfiles = new HashMap<>();
         config = new Config(this);
-
+        Protected = new HashMap<>();
+        
         PluginManager pm = getServer().getPluginManager();
         
         pm.registerEvents(playerListener, this);

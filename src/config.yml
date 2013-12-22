@@ -13,6 +13,11 @@ MySQL:
   Database: minecraft
 # Enable update
 UpdaterNotify: true
-#Defaults Flags
+# Allow Protected Blocks place inside protected area
+AllowProtectedBlockInsideArea: false
+#Defaults Area Flags
 # if allow all player to move inside area of others players
 AllowMoveInside: true
+# Protected Block - Blocks only owner can destroy ( and admin bypass )
+Protected:
+    - 5

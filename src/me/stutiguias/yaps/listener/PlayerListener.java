@@ -7,6 +7,7 @@ package me.stutiguias.yaps.listener;
 import me.stutiguias.yaps.init.Yaps;
 import me.stutiguias.yaps.init.Util;
 import me.stutiguias.yaps.model.Area;
+import me.stutiguias.yaps.model.BlockProtected;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -42,11 +43,23 @@ public class PlayerListener extends Util implements Listener {
     
     @EventHandler(priority = EventPriority.NORMAL)
     public void onBlockPlace(BlockPlaceEvent event) {
-        if(Yaps.Areas.isEmpty()) return;
-                
-        Location location = event.getBlock().getLocation();       
-        Player player = (Player)event.getPlayer();
         
+        String block = String.valueOf(event.getBlock().getTypeId());
+        Player player = (Player)event.getPlayer();
+        Location location = event.getBlock().getLocation();       
+
+        if(Yaps.config.Protected.contains(block)){ 
+            if(isInsideArea(location)) {
+               if(Yaps.config.AllowProtectedBlockInsideArea) {
+                   Protect(location, player, block);
+               }
+            }else{
+                Protect(location, player, block);
+            }
+        }
+        
+        if(Yaps.Areas.isEmpty()) return;
+
         if(!isValidEvent(player, location,"place")) {
             if(plugin.hasPermission(player,"yaps.bypass")) return;
             event.setCancelled(true);
@@ -55,10 +68,19 @@ public class PlayerListener extends Util implements Listener {
     
     @EventHandler(priority = EventPriority.NORMAL)
     public void onBlockBreak(BlockBreakEvent event) {
-        if(Yaps.Areas.isEmpty()) return;
-        
+                
         Location location = event.getBlock().getLocation();       
         Player player = (Player)event.getPlayer();
+        
+        if(Yaps.Protected.containsKey(location)) {
+           BlockProtected blockProtected = Yaps.Protected.get(location);
+           if(!blockProtected.getOwner().equals(event.getPlayer().getName())) {
+               SendMessage(player,"Block protected");
+               event.setCancelled(true);
+           }
+        }
+        
+        if(Yaps.Areas.isEmpty()) return;
         
         if(!isValidEvent(player, location,"break")) {
             if(plugin.hasPermission(player,"yaps.bypass")) return;
@@ -151,5 +173,14 @@ public class PlayerListener extends Util implements Listener {
     
     public boolean isAllowed(Area area,Player player){
         return area.getOwner().equals(player.getName());
+    }
+    
+    public boolean isInsideArea(Location location) {
+        return !Yaps.Areas.isEmpty() && plugin.getArea(location) != null;
+    }
+    
+    public void Protect(Location location,Player player,String block) {
+        Yaps.Protected.put(location,new BlockProtected(location, player.getName() , block));
+        SendMessage(player,"You place protected block");
     }
 }

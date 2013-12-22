@@ -7,6 +7,8 @@
 package me.stutiguias.yaps.configs;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import me.stutiguias.yaps.init.Yaps;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -29,6 +31,8 @@ public class Config {
     public String Password;
     public String Port;
     public String Database;
+    public List<String> Protected;
+    public boolean AllowProtectedBlockInsideArea;
     
     public Config(Yaps plugin) {
  
@@ -53,6 +57,13 @@ public class Config {
             UpdaterNotify = fc.getBoolean("UpdaterNotify");
             
             AllowMoveInside = fc.getBoolean("AllowMoveInside");
+            
+            Protected = new ArrayList<>();
+            for(String block:fc.getStringList("Protected")) {
+                Protected.add(block);
+            }
+            
+            AllowProtectedBlockInsideArea = fc.getBoolean("AllowProtectedBlockInsideArea");
             
         }catch(IOException ex){
             ex.printStackTrace();
