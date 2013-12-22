@@ -69,9 +69,11 @@ public class PlayerListener extends Util implements Listener {
         if(Yaps.Protected.containsKey(location)) {
            BlockProtected blockProtected = Yaps.Protected.get(location);
            if(!blockProtected.getOwner().equals(event.getPlayer().getName())) {
-               SendMessage(player,"Block protected");
+               SendMessage(player,"Can't remove block protected");
                event.setCancelled(true);
            }
+           Yaps.Protected.remove(location);
+           SendMessage(player,"Block protected break");
         }
         
         Area area = isInsideArea(location);
