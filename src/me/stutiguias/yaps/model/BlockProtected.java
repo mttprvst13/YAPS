@@ -14,6 +14,8 @@ import org.bukkit.Location;
  */
 public class BlockProtected {
     
+    public BlockProtected(){ }
+    
     public BlockProtected(Location location,String owner,String block) {
         this.location = location;
         this.Owner = owner;

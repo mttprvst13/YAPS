@@ -8,6 +8,7 @@ import me.stutiguias.yaps.init.Yaps;
 import me.stutiguias.yaps.init.Util;
 import me.stutiguias.yaps.model.Area;
 import me.stutiguias.yaps.model.BlockProtected;
+import me.stutiguias.yaps.model.Save;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -73,6 +74,9 @@ public class PlayerListener extends Util implements Listener {
                event.setCancelled(true);
            }
            Yaps.Protected.remove(location);
+           
+           Yaps.SaveList.add(new Save("remove",new BlockProtected(location,"","")));
+           
            SendMessage(player,"Block protected break");
         }
         
@@ -178,7 +182,11 @@ public class PlayerListener extends Util implements Listener {
     }
     
     private void Protect(Location location,Player player,String block) {
-        Yaps.Protected.put(location,new BlockProtected(location, player.getName() , block));
+        BlockProtected blockProtected = new BlockProtected(location, player.getName() , block);
+        
+        Yaps.Protected.put(location,blockProtected);
+        Yaps.SaveList.add(new Save("add",blockProtected));
+        
         SendMessage(player,"You place protected block");
     }
     

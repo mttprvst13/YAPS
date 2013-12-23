@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 
 public class WALDriver implements Driver {
     
-    private Driver driver;
+    private final Driver driver;
      
     public WALDriver(Driver driver) {
         this.driver = driver;

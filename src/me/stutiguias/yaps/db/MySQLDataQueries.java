@@ -66,6 +66,10 @@ public class MySQLDataQueries extends Queries {
 			Yaps.logger.log(Level.INFO, "{0} Creating table YAPS_Areas", plugin.prefix);
 			executeRawSQL("CREATE TABLE YAPS_Areas (id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(id), name VARCHAR(255), first VARCHAR(255), second VARCHAR(255), owner VARCHAR(255), flags VARCHAR(255), exit VARCHAR(255) );");
 		}
+                if (!tableExists("YAPS_Protected")) {
+			Yaps.logger.log(Level.INFO, "{0} Creating table YAPS_Protected", plugin.prefix);
+			executeRawSQL("CREATE TABLE YAPS_Protected (id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(id), location VARCHAR(255), owner VARCHAR(255), block VARCHAR(255) );");
+		}
                 if (!tableExists("YAPS_DbVersion")) {
                         Yaps.logger.log(Level.INFO, "{0} Creating table YAPS_DbVersion", plugin.prefix);
                         executeRawSQL("CREATE TABLE YAPS_DbVersion (id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(id), dbversion INT);");

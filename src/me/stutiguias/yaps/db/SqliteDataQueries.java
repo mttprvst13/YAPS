@@ -81,6 +81,10 @@ public class SqliteDataQueries extends Queries {
 			Yaps.logger.log(Level.INFO, "{0} Creating table YAPS_Areas", plugin.prefix);
 			executeRawSQL("CREATE TABLE YAPS_Areas (id INTEGER PRIMARY KEY, name VARCHAR(255), first VARCHAR(255), second VARCHAR(255), owner VARCHAR(255), flags VARCHAR(255), exit VARCHAR(255));");
 		}
+                if (!tableExists("YAPS_Protected")) {
+			Yaps.logger.log(Level.INFO, "{0} Creating table YAPS_Protected", plugin.prefix);
+			executeRawSQL("CREATE TABLE YAPS_Protected (id INTEGER PRIMARY KEY, location VARCHAR(255), owner VARCHAR(255), block VARCHAR(255) );");
+		}
                 if (!tableExists("YAPS_DbVersion")) {
                         Yaps.logger.log(Level.INFO, "{0} Creating table YAPS_DbVersion", plugin.prefix);
                         executeRawSQL("CREATE TABLE YAPS_DbVersion (id INTEGER PRIMARY KEY, dbversion INTEGER);");

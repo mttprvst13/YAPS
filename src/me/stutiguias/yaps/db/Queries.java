@@ -10,11 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import me.stutiguias.yaps.init.Yaps;
 import me.stutiguias.yaps.init.Util;
 import me.stutiguias.yaps.model.Area;
+import me.stutiguias.yaps.model.BlockProtected;
+import org.bukkit.Location;
 
 /**
  *
@@ -209,6 +212,96 @@ public class Queries extends Util implements IDataQueries {
                 closeResources(conn, st, rs);
         }
         return true;
+    }
+
+    @Override
+    public boolean InsertProtect(BlockProtected blockProtected) {
+        WALConnection conn = getConnection();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+
+        try {
+                st = conn.prepareStatement("INSERT INTO YAPS_Protected (location, owner, block) VALUES (?,?,?)");
+                st.setString(1, ToString(blockProtected.getLocation()));
+                st.setString(2, blockProtected.getOwner());
+                st.setString(3, blockProtected.getBlock());
+                st.executeUpdate();
+        } catch (SQLException e) {
+                Yaps.logger.log(Level.WARNING, "{0} Unable to insert block", plugin.prefix);
+                Yaps.logger.warning(e.getMessage());
+        } finally {
+                closeResources(conn, st, rs);
+        }
+        return true;
+    }
+
+    @Override
+    public BlockProtected GetProtect(Location location) {      
+        BlockProtected blockProtected = new BlockProtected();
+        WALConnection conn = getConnection();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+                st = conn.prepareStatement("SELECT location,owner,block FROM YAPS_Protected where location = ?");
+                st.setString(1, ToString(location));
+                rs = st.executeQuery();
+                while (rs.next()) {                     
+                        blockProtected.setLocation(toLocation(rs.getString("location")));
+                        blockProtected.setOwner(rs.getString("owner"));
+                        blockProtected.setBlock(rs.getString("block"));
+                }
+        } catch (SQLException e) {
+                Yaps.logger.log(Level.WARNING, "{0} Unable to get block", new Object[]{plugin.prefix});
+                Yaps.logger.warning(e.getMessage());
+        } finally {
+                closeResources(conn, st, rs);
+        }
+        return blockProtected;
+    }
+
+    @Override
+    public HashMap<Location, BlockProtected> GetAllProtect() {
+        HashMap<Location, BlockProtected> protectList = new HashMap<>();
+                
+        WALConnection conn = getConnection();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+                st = conn.prepareStatement("SELECT location,owner,block FROM YAPS_Protected");
+                rs = st.executeQuery();
+                while (rs.next()) {
+                        BlockProtected blockProtected = new BlockProtected();
+                        blockProtected.setLocation(toLocation(rs.getString("location")));
+                        blockProtected.setOwner(rs.getString("owner"));
+                        blockProtected.setBlock(rs.getString("block"));
+                        protectList.put(blockProtected.getLocation(),blockProtected);
+                }
+        } catch (SQLException e) {
+                Yaps.logger.log(Level.WARNING, "{0} Unable to get areas", new Object[]{plugin.prefix});
+                Yaps.logger.warning(e.getMessage());
+        } finally {
+                closeResources(conn, st, rs);
+        }
+        return protectList;
+    }
+
+    @Override
+    public boolean RemoveProtect(Location location) {
+        WALConnection conn = getConnection();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        int result = 0;
+        try {
+                st = conn.prepareStatement("DELETE FROM YAPS_Protected where location = ?");
+                st.setString(1, ToString(location) );
+                result = st.executeUpdate();
+        } catch (SQLException e) {
+                Yaps.logger.log(Level.WARNING, "{0} Unable to update DB", plugin.prefix);
+                Yaps.logger.warning(e.getMessage());
+        } finally {
+                closeResources(conn, st, rs);
+        }
+        return result != 0;
     }
     
 }

@@ -4,9 +4,12 @@
  */
 package me.stutiguias.yaps.db;
 
+import java.util.HashMap;
 import me.stutiguias.yaps.db.connection.WALConnection;
 import java.util.List;
 import me.stutiguias.yaps.model.Area;
+import me.stutiguias.yaps.model.BlockProtected;
+import org.bukkit.Location;
 
 /**
  *
@@ -23,4 +26,8 @@ public interface IDataQueries {
         boolean Delete(Area area);
         boolean UpdateArea(Area area);
         boolean SetExit(Area area);
+        boolean InsertProtect(BlockProtected blockProtected);
+        BlockProtected GetProtect(Location location);
+        HashMap<Location,BlockProtected> GetAllProtect();
+        boolean RemoveProtect(Location location);
 }
