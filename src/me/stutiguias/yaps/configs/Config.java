@@ -33,6 +33,10 @@ public class Config {
     public String Database;
     public List<String> Protected;
     public boolean AllowProtectedBlockInsideArea;
+    public int ConnectionPoolSize;
+    public boolean SaveQueue;
+    public int RunTaskSeconds;
+    public boolean SearchAgainstMemory;
     
     public Config(Yaps plugin) {
  
@@ -58,11 +62,15 @@ public class Config {
             
             AllowMoveInside = fc.getBoolean("AllowMoveInside");
             
+            ConnectionPoolSize = fc.getInt("ConnectionPoolSize");
+            
             Protected = new ArrayList<>();
             for(String block:fc.getStringList("Protected")) {
                 Protected.add(block);
             }
-            
+            SaveQueue = fc.getBoolean("SaveQueue");
+            RunTaskSeconds = fc.getInt("RunTaskSeconds");
+            SearchAgainstMemory = fc.getBoolean("SearchAgainstMemory");
             AllowProtectedBlockInsideArea = fc.getBoolean("AllowProtectedBlockInsideArea");
             
         }catch(IOException ex){

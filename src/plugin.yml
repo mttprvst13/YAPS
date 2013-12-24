@@ -40,7 +40,7 @@ permissions:
         description: Allow set exit
         default: op          
      yaps.admin:
-      description: Gives access to all TimeSpawner commands
+      description: Gives access to all YAPS commands
       children:
         yaps.update: true
         yaps.define: true

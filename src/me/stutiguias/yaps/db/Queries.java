@@ -237,7 +237,7 @@ public class Queries extends Util implements IDataQueries {
 
     @Override
     public BlockProtected GetProtect(Location location) {      
-        BlockProtected blockProtected = new BlockProtected();
+        BlockProtected blockProtected = null;
         WALConnection conn = getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -245,7 +245,8 @@ public class Queries extends Util implements IDataQueries {
                 st = conn.prepareStatement("SELECT location,owner,block FROM YAPS_Protected where location = ?");
                 st.setString(1, ToString(location));
                 rs = st.executeQuery();
-                while (rs.next()) {                     
+                while (rs.next()) {     
+                        blockProtected = new BlockProtected();
                         blockProtected.setLocation(toLocation(rs.getString("location")));
                         blockProtected.setOwner(rs.getString("owner"));
                         blockProtected.setBlock(rs.getString("block"));

@@ -89,9 +89,10 @@ public class Yaps extends JavaPlugin {
         }
         
         Areas = db.getAreas();
-        Protected = db.GetAllProtect();
         
-        getServer().getScheduler().runTaskTimerAsynchronously(this,new SaveTask(this),2 * 20L,2 * 20L);
+        if(config.SearchAgainstMemory) Protected = db.GetAllProtect();
+        
+        if(config.SaveQueue) getServer().getScheduler().runTaskTimerAsynchronously(this,new SaveTask(this),config.RunTaskSeconds * 20L,config.RunTaskSeconds * 20L);
         
         // Metrics 
         try {

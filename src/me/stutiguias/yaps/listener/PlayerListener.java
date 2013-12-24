@@ -66,16 +66,46 @@ public class PlayerListener extends Util implements Listener {
                 
         Location location = event.getBlock().getLocation();       
         Player player = (Player)event.getPlayer();
+        BlockProtected blockProtected = null;
+        boolean isBlockProtect;
         
-        if(Yaps.Protected.containsKey(location)) {
-           BlockProtected blockProtected = Yaps.Protected.get(location);
+        if(Yaps.config.SearchAgainstMemory) {
+            isBlockProtect = Yaps.Protected.containsKey(location);
+        }else{
+            blockProtected = Yaps.db.GetProtect(location);
+            isBlockProtect = blockProtected != null;
+        }
+        
+        if(Yaps.config.SaveQueue && !Yaps.SaveList.isEmpty()) {
+            for(Save save:Yaps.SaveList) {
+                boolean equalsLocation = save.getBlockProtected().getLocation().equals(location);
+                boolean equalsPlayer = save.getBlockProtected().getOwner().equals(player.getName());
+                if(equalsLocation && equalsPlayer){
+                    blockProtected = save.getBlockProtected();
+                    isBlockProtect = true;
+                    break;
+                }
+            }
+        }
+        
+        if(isBlockProtect) {
+
+           if(Yaps.config.SearchAgainstMemory) { 
+               blockProtected = Yaps.Protected.get(location);
+           }
+
            if(!blockProtected.getOwner().equals(event.getPlayer().getName())) {
                SendMessage(player,"Can't remove block protected");
                event.setCancelled(true);
            }
-           Yaps.Protected.remove(location);
            
-           Yaps.SaveList.add(new Save("remove",new BlockProtected(location,"","")));
+           if(Yaps.config.SearchAgainstMemory) Yaps.Protected.remove(location);
+           
+           if(Yaps.config.SaveQueue) {
+               Yaps.SaveList.add(new Save("remove",new BlockProtected(location,"","")));
+           }else{
+               Yaps.db.RemoveProtect(location);
+           }
            
            SendMessage(player,"Block protected break");
         }
@@ -184,8 +214,13 @@ public class PlayerListener extends Util implements Listener {
     private void Protect(Location location,Player player,String block) {
         BlockProtected blockProtected = new BlockProtected(location, player.getName() , block);
         
-        Yaps.Protected.put(location,blockProtected);
-        Yaps.SaveList.add(new Save("add",blockProtected));
+        if(Yaps.config.SearchAgainstMemory) Yaps.Protected.put(location,blockProtected);
+        
+        if(Yaps.config.SaveQueue) {
+            Yaps.SaveList.add(new Save("add",blockProtected));
+        }else{
+            Yaps.db.InsertProtect(blockProtected);
+        }
         
         SendMessage(player,"You place protected block");
     }

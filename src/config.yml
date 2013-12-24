@@ -11,6 +11,32 @@ MySQL:
   Password: change_this
   Port: '3306'
   Database: minecraft
+# Pool Size ( For Mysql Connection )
+ConnectionPoolSize : 10
+# This Option will keep all
+# protection blocks on memory
+# ( increase use of memory )
+# and will search against 
+# memory not database
+# every time need it
+# Use : 
+# + memory 
+# - database
+SearchAgainstMemory: false
+# Save to Database in Queue
+# Not will save direct 
+# will put on queue list
+# and will save 1 each time
+# this can save you server
+# from having too much 
+# inserting on database at same
+# time
+# Use :
+# + memory | processing
+# - database
+SaveQueue : false
+# Run task on each seconds for SaveQueue
+RunTaskSeconds : 2
 # Enable update
 UpdaterNotify: true
 # Allow Protected Blocks place inside protected area
@@ -21,3 +47,4 @@ AllowMoveInside: true
 # Protected Block - Blocks only owner can destroy ( and admin bypass )
 Protected:
     - 5
+    - 35

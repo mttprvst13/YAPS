@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import me.stutiguias.yaps.init.Yaps;
 
 public class WALConnectionPool {
     
@@ -20,7 +21,7 @@ public class WALConnectionPool {
     }
     
     private boolean ready = false;
-    private static final int poolsize = 10;
+    private static int poolsize;
     private static List<WALConnection> connections;
     private static final long timeToLive = 300000;
     private final ConnectionReaper reaper;
@@ -32,6 +33,7 @@ public class WALConnectionPool {
         Driver driver = (Driver) Class.forName(driverName).newInstance();
         WALDriver jDriver = new WALDriver(driver);
         DriverManager.registerDriver(jDriver);
+        poolsize = Yaps.config.ConnectionPoolSize;
         ready = true;
         this.url = url;
         this.username = username;
