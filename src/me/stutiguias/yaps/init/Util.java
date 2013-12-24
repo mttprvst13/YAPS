@@ -7,6 +7,7 @@
 package me.stutiguias.yaps.init;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
@@ -54,26 +55,33 @@ public class Util {
     }
         
     public void SendMessage(String msg) {
-        sender.sendMessage(plugin.parseColor(msg));
+        sender.sendMessage(parseColor(msg));
     }
         
     public void SendMessage(String msg,Object[] args) {
-        sender.sendMessage(plugin.parseColor(String.format(msg,args)));
+        sender.sendMessage(parseColor(String.format(msg,args)));
     }
     
     public void SendMessage(Player player,String msg) {
-        player.sendMessage(plugin.parseColor(msg));
+        player.sendMessage(parseColor(msg));
     }
         
     public void SendMessage(Player player,String msg,Object[] args) {
-        player.sendMessage(plugin.parseColor(String.format(msg,args)));
+        player.sendMessage(parseColor(String.format(msg,args)));
     }
     
     public void BrcstMsg(String msg) {
-        plugin.getServer().broadcastMessage(plugin.parseColor(msg));
+        plugin.getServer().broadcastMessage(parseColor(msg));
     }
     
     public void BrcstMsg(String msg,Object[] args) {
-        plugin.getServer().broadcastMessage(plugin.parseColor(String.format(msg,args)));
+        plugin.getServer().broadcastMessage(parseColor(String.format(msg,args)));
+    }
+
+    public String parseColor(String message) {
+         for (ChatColor color : ChatColor.values()) {
+            message = message.replaceAll(String.format("&%c", color.getChar()), color.toString());
+        }
+        return message;
     }
 }

@@ -147,14 +147,7 @@ public class Yaps extends JavaPlugin {
         }
         return (economy != null);
     }
- 
-    public String parseColor(String message) {
-         for (ChatColor color : ChatColor.values()) {
-            message = message.replaceAll(String.format("&%c", color.getChar()), color.toString());
-        }
-        return message;
-    }
-     
+
     public void Update() {
         Updater updater = new Updater(this, 49809, this.getFile(), Updater.UpdateType.NO_VERSION_CHECK, true);
     }

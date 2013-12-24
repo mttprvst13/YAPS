@@ -32,7 +32,7 @@ SearchAgainstMemory: false
 # inserting on database at same
 # time
 # Use :
-# + memory | processing
+# + memory | + processing
 # - database
 SaveQueue : false
 # Run task on each seconds for SaveQueue
