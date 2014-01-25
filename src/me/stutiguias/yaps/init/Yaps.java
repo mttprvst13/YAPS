@@ -24,7 +24,6 @@ import me.stutiguias.yaps.task.SaveTask;
 import me.stutiguias.yaps.updater.Updater;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
@@ -51,6 +50,8 @@ public class Yaps extends JavaPlugin {
     public Permission permission = null;
     public Economy economy = null;
 
+    public static boolean protectStatus;
+    
     public static Config config;
     
     public static IDataQueries db;
@@ -73,6 +74,7 @@ public class Yaps extends JavaPlugin {
         PlayerProfiles = new HashMap<>();
         config = new Config(this);
         
+        protectStatus = true;
         
         PluginManager pm = getServer().getPluginManager();
         
@@ -104,7 +106,7 @@ public class Yaps extends JavaPlugin {
         }
        
         if(config.UpdaterNotify){
-            Updater updater = new Updater(this, 49809, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false); // Start Updater but just do a version check
+            Updater updater = new Updater(this, 70407, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false); // Start Updater but just do a version check
             
             update = updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE; // Determine if there is an update ready for us
             name = updater.getLatestName(); // Get the latest name

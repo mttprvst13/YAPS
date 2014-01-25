@@ -226,6 +226,7 @@ public class PlayerListener extends Util implements Listener {
     }
     
     private void onBlockProtect(Area area,Location location,String block,Player player) {
+        if(!Yaps.protectStatus) return;
         if(!Yaps.config.Protected.contains(block)) return;
         if(area != null && !Yaps.config.AllowProtectedBlockInsideArea) return;
         Protect(location, player, block);

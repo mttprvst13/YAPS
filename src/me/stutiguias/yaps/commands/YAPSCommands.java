@@ -77,14 +77,46 @@ public class YAPSCommands extends Util implements CommandExecutor {
             case "setexit":
                 if(!plugin.hasPermission(sender.getName(),"yaps.setexit")) return false;
                 return SetExit();
-                
+            case "on":
+                if(!plugin.hasPermission(sender.getName(),"yaps.onoff")) return false;
+                return On();
+             case "off":
+                if(!plugin.hasPermission(sender.getName(),"yaps.onoff")) return false;
+                return Off();    
+             case "listp":
+                if(!plugin.hasPermission(sender.getName(),"yaps.listprotectionblocks")) return false;
+                return ListProtectBlocks();
+                 
             case "?":
             case "help":
             default:
                 return Help();
         }       
     } 
-        
+ 
+    public boolean ListProtectBlocks() {
+        if(Yaps.config.Protected.isEmpty()) {
+            SendMessage("&4 Protected Blocks empty");
+            return true;
+        }
+        SendMessage(MsgHr);
+        for(String blockId:Yaps.config.Protected){
+            SendMessage("&3Id: &6%s", new Object[]{ blockId });
+        }
+        SendMessage(MsgHr);
+        return true;
+    }
+    
+    public boolean Off() {
+        Yaps.protectStatus = false;
+        return true;
+    }        
+    
+    public boolean On() {
+        Yaps.protectStatus = true;
+        return true;
+    }
+    
     public boolean List() {
         if(Yaps.Areas.isEmpty()) {
             SendMessage("&4 Areas empty");
@@ -202,6 +234,14 @@ public class YAPSCommands extends Util implements CommandExecutor {
             SendMessage("&6/yaps <d or define> <areaName> &e| &7Save Select area");
             SendMessage("&6/yaps <d or define> <areaName> <owner> &e| &7Save Select area");
         }
+        
+        if(plugin.hasPermission(sender.getName(),"yaps.listprotectionblocks")){
+            SendMessage("&6/yaps <listp>  &e| &7List Protected Blocks");
+        }     
+        
+        if(plugin.hasPermission(sender.getName(),"yaps.onoff")){
+            SendMessage("&6/yaps <on|off>  &e| &7Enable or Disable Protect Place Block");
+        }       
         
         if(plugin.hasPermission(sender.getName(),"yaps.wand")){
             SendMessage("&6/yaps <w or wand>  &e| &7Get Special Wand to make area");

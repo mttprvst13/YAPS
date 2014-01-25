@@ -39,6 +39,12 @@ permissions:
      yaps.setexit:
         description: Allow set exit
         default: op          
+     yaps.onoff:
+        description: Allow set exit
+        default: op      
+     yaps.listprotectionblocks:
+        description: Allow set exit
+        default: op    
      yaps.admin:
       description: Gives access to all YAPS commands
       children:
@@ -52,3 +58,5 @@ permissions:
         yaps.info: true
         yaps.list: true
         yaps.bypass: true
+        yaps.onoff: true
+        yaps.listprotectionblocks: true
