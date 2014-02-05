@@ -9,7 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -219,12 +221,13 @@ public class Queries extends Util implements IDataQueries {
         WALConnection conn = getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
-
+        
         try {
-                st = conn.prepareStatement("INSERT INTO YAPS_Protected (location, owner, block) VALUES (?,?,?)");
+                st = conn.prepareStatement("INSERT INTO YAPS_Protected (location, owner, block, time) VALUES (?,?,?,?)");
                 st.setString(1, ToString(blockProtected.getLocation()));
                 st.setString(2, blockProtected.getOwner());
                 st.setString(3, blockProtected.getBlock());
+                st.setTimestamp(4,new Timestamp(new Date().getTime()));
                 st.executeUpdate();
         } catch (SQLException e) {
                 Yaps.logger.log(Level.WARNING, "{0} Unable to insert block", plugin.prefix);
@@ -268,13 +271,14 @@ public class Queries extends Util implements IDataQueries {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-                st = conn.prepareStatement("SELECT location,owner,block FROM YAPS_Protected");
+                st = conn.prepareStatement("SELECT location,owner,block,time FROM YAPS_Protected");
                 rs = st.executeQuery();
                 while (rs.next()) {
                         BlockProtected blockProtected = new BlockProtected();
                         blockProtected.setLocation(toLocation(rs.getString("location")));
                         blockProtected.setOwner(rs.getString("owner"));
                         blockProtected.setBlock(rs.getString("block"));
+                        blockProtected.setTime(rs.getTimestamp("time"));
                         protectList.put(blockProtected.getLocation(),blockProtected);
                 }
         } catch (SQLException e) {
@@ -303,6 +307,53 @@ public class Queries extends Util implements IDataQueries {
                 closeResources(conn, st, rs);
         }
         return result != 0;
+    }
+
+    @Override
+    public int RemoveOld(Timestamp time) {
+                
+        WALConnection conn = getConnection();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        int result = 0;
+        try {
+                st = conn.prepareStatement("DELETE FROM YAPS_Protected where time < ?");
+                st.setTimestamp(1,time);
+                result = st.executeUpdate();
+        } catch (SQLException e) {
+                Yaps.logger.log(Level.WARNING, "{0} Unable to update DB", plugin.prefix);
+                Yaps.logger.warning(e.getMessage());
+        } finally {
+                closeResources(conn, st, rs);
+        }
+        return result;
+    }
+
+    @Override
+    public List<BlockProtected> GetAllProtectList() {
+        List<BlockProtected> protectList = new ArrayList<>();
+                
+        WALConnection conn = getConnection();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+                st = conn.prepareStatement("SELECT location,owner,block,time FROM YAPS_Protected");
+                rs = st.executeQuery();
+                while (rs.next()) {
+                        BlockProtected blockProtected = new BlockProtected();
+                        blockProtected.setLocation(toLocation(rs.getString("location")));
+                        blockProtected.setOwner(rs.getString("owner"));
+                        blockProtected.setBlock(rs.getString("block"));
+                        blockProtected.setTime(rs.getTimestamp("time"));
+                        protectList.add(blockProtected);
+                }
+        } catch (SQLException e) {
+                Yaps.logger.log(Level.WARNING, "{0} Unable to get areas", new Object[]{plugin.prefix});
+                Yaps.logger.warning(e.getMessage());
+        } finally {
+                closeResources(conn, st, rs);
+        }
+        return protectList;
     }
     
 }

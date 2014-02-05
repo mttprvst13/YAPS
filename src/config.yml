@@ -1,5 +1,6 @@
 # don't change this
-configversion: 1
+configversion: 3
+
 #DataBase
 DataBase:
   # You need to choose if you will use SQLite or Mysql ( default is SQLite )
@@ -13,31 +14,37 @@ MySQL:
   Database: minecraft
 # Pool Size ( For Mysql Connection )
 ConnectionPoolSize : 10
-# This Option will keep all
-# protection blocks on memory
-# ( increase use of memory )
-# and will search against 
-# memory not database
-# every time need it
+
+# how many days after delete old records
+PurgeOldRecords: 3d
+# How many seconds for run purge 
+# 43200 = 12h ( 12h in 12h )
+PurgeOldRecordsTaskTimer: 43200
+
+# This Option will keep all protection blocks on memory
+# ( increase use of memory ) and will search against 
+# memory not database every time need it
 SearchAgainstMemory: false
-# Save to Database in Queue
-# Not will save direct 
-# will put on queue list
-# and will save 1 each time
-# this can save you server
-# from having too much 
-# inserting on database at same
-# time
+
+# Save to Database in Queue Not will save direct 
+# will put on queue list and will save 1 each time
+# this can save you server from having too much 
+# inserting on database at same time
 SaveQueue : false
+
 # Run task on each seconds for SaveQueue
 RunTaskSeconds : 2
+
 # Enable update
 UpdaterNotify: true
+
 # Allow Protected Blocks place inside protected area
 AllowProtectedBlockInsideArea: false
+
 #Defaults Area Flags
 # if allow all player to move inside area of others players
 AllowMoveInside: true
+
 # Protected Block - Blocks only owner can destroy ( and admin bypass )
 Protected:
 - '1'

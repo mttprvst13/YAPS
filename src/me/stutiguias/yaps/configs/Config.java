@@ -7,6 +7,7 @@
 package me.stutiguias.yaps.configs;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -37,6 +38,8 @@ public class Config {
     public boolean SaveQueue;
     public int RunTaskSeconds;
     public boolean SearchAgainstMemory;
+    public String PurgeOldRecords;
+    public int PurgeOldRecordsTaskTimer;
     
     public Config(Yaps plugin) {
  
@@ -45,7 +48,7 @@ public class Config {
             config.setupConfig();
             FileConfiguration fc = config.getConfig();   
                         
-            if(!fc.isSet("configversion") || fc.getInt("configversion") != 1){ 
+            if(!fc.isSet("configversion") || fc.getInt("configversion") != 3){ 
                 config.MakeOld();
                 config.setupConfig();
                 fc = config.getConfig();  
@@ -72,6 +75,8 @@ public class Config {
             RunTaskSeconds = fc.getInt("RunTaskSeconds");
             SearchAgainstMemory = fc.getBoolean("SearchAgainstMemory");
             AllowProtectedBlockInsideArea = fc.getBoolean("AllowProtectedBlockInsideArea");
+            PurgeOldRecords = fc.getString("PurgeOldRecords");
+            PurgeOldRecordsTaskTimer = fc.getInt("PurgeOldRecordsTaskTimer");
             
         }catch(IOException ex){
             ex.printStackTrace();

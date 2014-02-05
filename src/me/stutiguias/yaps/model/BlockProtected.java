@@ -6,6 +6,7 @@
 
 package me.stutiguias.yaps.model;
 
+import java.sql.Timestamp;
 import org.bukkit.Location;
 
 /**
@@ -25,7 +26,8 @@ public class BlockProtected {
     private Location location;
     private String Owner;
     private String block;
-
+    private Timestamp time;
+    
     /**
      * @return the location
      */
@@ -66,5 +68,19 @@ public class BlockProtected {
      */
     public void setBlock(String block) {
         this.block = block;
+    }
+
+    /**
+     * @return the time
+     */
+    public Timestamp getTime() {
+        return time;
+    }
+
+    /**
+     * @param time the time to set
+     */
+    public void setTime(Timestamp time) {
+        this.time = time;
     }
 }

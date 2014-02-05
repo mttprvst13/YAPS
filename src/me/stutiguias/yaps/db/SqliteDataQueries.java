@@ -90,6 +90,11 @@ public class SqliteDataQueries extends Queries {
                         executeRawSQL("CREATE TABLE YAPS_DbVersion (id INTEGER PRIMARY KEY, dbversion INTEGER);");
                         executeRawSQL("INSERT INTO YAPS_DbVersion (dbversion) VALUES (1)");
                 }
+                if (tableVersion() == 1) {
+                        Yaps.logger.log(Level.INFO, "{0} Update DB version to 2", plugin.prefix);
+                        executeRawSQL("ALTER TABLE YAPS_Protected ADD COLUMN time TIMESTAMP;");
+                        executeRawSQL("UPDATE YAPS_DbVersion SET dbversion = 2 where id = 1");
+                }
     }
     
 }

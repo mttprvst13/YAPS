@@ -4,6 +4,7 @@
  */
 package me.stutiguias.yaps.db;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import me.stutiguias.yaps.db.connection.WALConnection;
 import java.util.List;
@@ -29,5 +30,7 @@ public interface IDataQueries {
         boolean InsertProtect(BlockProtected blockProtected);
         BlockProtected GetProtect(Location location);
         HashMap<Location,BlockProtected> GetAllProtect();
+        List<BlockProtected> GetAllProtectList();
         boolean RemoveProtect(Location location);
+        int RemoveOld(Timestamp time);
 }

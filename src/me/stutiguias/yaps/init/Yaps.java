@@ -21,6 +21,7 @@ import me.stutiguias.yaps.model.Area;
 import me.stutiguias.yaps.model.BlockProtected;
 import me.stutiguias.yaps.model.Save;
 import me.stutiguias.yaps.model.YAPSPlayer;
+import me.stutiguias.yaps.task.PurgeOldRecordsTask;
 import me.stutiguias.yaps.task.SaveTask;
 import me.stutiguias.yaps.updater.Updater;
 import net.milkbowl.vault.economy.Economy;
@@ -99,6 +100,8 @@ public class Yaps extends JavaPlugin {
         if(config.SearchAgainstMemory) Protected = db.GetAllProtect();
         
         if(config.SaveQueue) getServer().getScheduler().runTaskTimerAsynchronously(this,new SaveTask(this),config.RunTaskSeconds * 20L,config.RunTaskSeconds * 20L);
+        
+        getServer().getScheduler().runTaskTimerAsynchronously(this, new PurgeOldRecordsTask(this), config.PurgeOldRecordsTaskTimer * 20L,config.PurgeOldRecordsTaskTimer * 20L);
         
         // Metrics 
         try {

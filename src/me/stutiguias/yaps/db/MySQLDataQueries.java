@@ -64,7 +64,7 @@ public class MySQLDataQueries extends Queries {
 		}
 		if (!tableExists("YAPS_Areas")) {
 			Yaps.logger.log(Level.INFO, "{0} Creating table YAPS_Areas", plugin.prefix);
-			executeRawSQL("CREATE TABLE YAPS_Areas (id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(id), name VARCHAR(255), first VARCHAR(255), second VARCHAR(255), owner VARCHAR(255), flags VARCHAR(255), exit VARCHAR(255) );");
+			executeRawSQL("CREATE TABLE YAPS_Areas (id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(id), name VARCHAR(255), first VARCHAR(255), second VARCHAR(255), owner VARCHAR(255), flags VARCHAR(255), `exit` VARCHAR(255) );");
 		}
                 if (!tableExists("YAPS_Protected")) {
 			Yaps.logger.log(Level.INFO, "{0} Creating table YAPS_Protected", plugin.prefix);
@@ -74,7 +74,12 @@ public class MySQLDataQueries extends Queries {
                         Yaps.logger.log(Level.INFO, "{0} Creating table YAPS_DbVersion", plugin.prefix);
                         executeRawSQL("CREATE TABLE YAPS_DbVersion (id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(id), dbversion INT);");
                         executeRawSQL("INSERT INTO YAPS_DbVersion (dbversion) VALUES (1)");
-                }                
+                }     
+                if (tableVersion() == 1) {
+                        Yaps.logger.log(Level.INFO, "{0} Update DB version to 2", plugin.prefix);
+                        executeRawSQL("ALTER TABLE YAPS_Protected ADD COLUMN `time` TIMESTAMP AFTER `block` ");
+                        executeRawSQL("UPDATE YAPS_DbVersion SET dbversion = 2 where id = 1");
+                }
 	}
     
 }
