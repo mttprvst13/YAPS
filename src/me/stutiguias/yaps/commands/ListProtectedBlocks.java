@@ -31,7 +31,7 @@ public class ListProtectedBlocks extends  CommandHandler {
             return true;
         }
         
-        if(args.length > 1) {
+        if(args.length <= 1) {
             ShowAllProtectedBlocks();
         }else{
             isProtected(args[1]);
@@ -55,7 +55,11 @@ public class ListProtectedBlocks extends  CommandHandler {
         for(String blockId:Yaps.config.Protected) {
             if(blockId.equals(id)) check = "is protected";
         }
-        SendMessage("&3Id: &6%s &6- %s",new Object[] { id , check });
+        try{
+            SendMessage("&3Id: &6%s ( &6%s ) &6- %s",new Object[] { Material.getMaterial( Integer.parseInt(id) ) , id , check });
+        }catch(NumberFormatException ex){
+            SendMessage("&4Need to inform a valid id");
+        }
         SendMessage(MsgHr); 
     }
 

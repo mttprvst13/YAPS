@@ -34,7 +34,8 @@ public class Help extends CommandHandler {
         }
         
         if(plugin.hasPermission(sender.getName(),"yaps.listprotectionblocks")){
-            SendMessage("&6/yaps <listp>  &e| &7List Protected Blocks");
+            SendMessage("&6/yaps <listp> &e| &7List Protected Blocks");
+            SendMessage("&6/yaps <listp> <id> &e| &7Find if this block id is protected");
         }     
         
         if(plugin.hasPermission(sender.getName(),"yaps.onoff")){

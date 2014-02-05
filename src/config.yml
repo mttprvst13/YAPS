@@ -21,6 +21,7 @@ PurgeOldRecords: 3d
 AutoPurge : true
 # How many seconds for run purge 
 # 43200 = 12h ( 12h in 12h )
+# Only if AutoPurge is true
 PurgeOldRecordsTaskTimer: 43200
 
 # This Option will keep all protection blocks on memory
