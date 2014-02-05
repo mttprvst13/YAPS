@@ -56,6 +56,8 @@ public class YAPSCommands extends Util implements CommandExecutor {
         avaibleCommands.put("i", info);
         avaibleCommands.put("info", info);
         
+        avaibleCommands.put("purge", new Purge(plugin));
+        
         avaibleCommands.put("reload", new Reload(plugin));
         avaibleCommands.put("update", new Update(plugin));
         

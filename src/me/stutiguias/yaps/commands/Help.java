@@ -53,6 +53,10 @@ public class Help extends CommandHandler {
             SendMessage("&6/yaps <i or info> &e| &7info about area you are");
         }   
         
+        if(plugin.hasPermission(sender.getName(),"yaps.purge")){
+            SendMessage("&6/yaps purge &e| &7Delete Old Records");
+        }
+        
         if(plugin.hasPermission(sender.getName(),"yaps.delete")){
             SendMessage("&6/yaps <dl or delete> <areaName> &e| &7Delete an area");
         }

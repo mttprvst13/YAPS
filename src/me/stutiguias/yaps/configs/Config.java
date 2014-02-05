@@ -40,6 +40,7 @@ public class Config {
     public boolean SearchAgainstMemory;
     public String PurgeOldRecords;
     public int PurgeOldRecordsTaskTimer;
+    public boolean AutoPurge;
     
     public Config(Yaps plugin) {
  
@@ -62,21 +63,21 @@ public class Config {
             Database = fc.getString("MySQL.Database");
             
             UpdaterNotify = fc.getBoolean("UpdaterNotify");
-            
             AllowMoveInside = fc.getBoolean("AllowMoveInside");
-            
             ConnectionPoolSize = fc.getInt("ConnectionPoolSize");
             
             Protected = new ArrayList<>();
             for(String block:fc.getStringList("Protected")) {
                 Protected.add(block);
             }
+            
             SaveQueue = fc.getBoolean("SaveQueue");
             RunTaskSeconds = fc.getInt("RunTaskSeconds");
             SearchAgainstMemory = fc.getBoolean("SearchAgainstMemory");
             AllowProtectedBlockInsideArea = fc.getBoolean("AllowProtectedBlockInsideArea");
             PurgeOldRecords = fc.getString("PurgeOldRecords");
             PurgeOldRecordsTaskTimer = fc.getInt("PurgeOldRecordsTaskTimer");
+            AutoPurge = fc.getBoolean("AutoPurge");
             
         }catch(IOException ex){
             ex.printStackTrace();

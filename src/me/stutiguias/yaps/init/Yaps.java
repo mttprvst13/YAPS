@@ -101,7 +101,7 @@ public class Yaps extends JavaPlugin {
         
         if(config.SaveQueue) getServer().getScheduler().runTaskTimerAsynchronously(this,new SaveTask(this),config.RunTaskSeconds * 20L,config.RunTaskSeconds * 20L);
         
-        getServer().getScheduler().runTaskTimerAsynchronously(this, new PurgeOldRecordsTask(this), config.PurgeOldRecordsTaskTimer * 20L,config.PurgeOldRecordsTaskTimer * 20L);
+        if(config.AutoPurge) getServer().getScheduler().runTaskTimerAsynchronously(this, new PurgeOldRecordsTask(this), config.PurgeOldRecordsTaskTimer * 20L,config.PurgeOldRecordsTaskTimer * 20L);
         
         // Metrics 
         try {
