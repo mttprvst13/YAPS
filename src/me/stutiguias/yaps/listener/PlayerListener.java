@@ -97,6 +97,7 @@ public class PlayerListener extends Util implements Listener {
            if(!blockProtected.getOwner().equals(event.getPlayer().getName())) {
                SendMessage(player,"Can't remove block protected");
                event.setCancelled(true);
+               return;
            }
            
            if(Yaps.config.SearchAgainstMemory) Yaps.Protected.remove(location);

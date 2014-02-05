@@ -19,9 +19,6 @@ ConnectionPoolSize : 10
 # and will search against 
 # memory not database
 # every time need it
-# Use : 
-# + memory 
-# - database
 SearchAgainstMemory: false
 # Save to Database in Queue
 # Not will save direct 
@@ -31,9 +28,6 @@ SearchAgainstMemory: false
 # from having too much 
 # inserting on database at same
 # time
-# Use :
-# + memory | + processing
-# - database
 SaveQueue : false
 # Run task on each seconds for SaveQueue
 RunTaskSeconds : 2
