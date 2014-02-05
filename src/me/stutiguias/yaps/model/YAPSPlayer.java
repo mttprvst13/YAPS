@@ -19,12 +19,12 @@ public class YAPSPlayer {
         
         this.name = name;
         this.ban = ban;
-        
+        this.protectPlace = true;
     }
     
     private String name;
     private Boolean ban;
-
+    private Boolean protectPlace;
     /**
      * @return the name
      */
@@ -51,6 +51,20 @@ public class YAPSPlayer {
      */
     public void setBan(Boolean ban) {
         this.ban = ban;
+    }
+
+    /**
+     * @return the protectPlace
+     */
+    public Boolean isProtectedPlace() {
+        return protectPlace;
+    }
+
+    /**
+     * @param protectPlace the protectPlace to set
+     */
+    public void setProtectPlace(Boolean protectPlace) {
+        this.protectPlace = protectPlace;
     }
 
 }

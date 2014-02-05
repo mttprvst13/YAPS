@@ -2,6 +2,7 @@ package me.stutiguias.yaps.init;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,6 +43,7 @@ public class Yaps extends JavaPlugin {
     
     public static HashMap<Player,Area> AreaCreating;
     public static HashMap<String,YAPSPlayer> PlayerProfiles;
+    public static List<String> notProtectPlace;
     
     public static List<Area> Areas;
     
@@ -72,6 +74,8 @@ public class Yaps extends JavaPlugin {
         
         AreaCreating = new HashMap<>();
         PlayerProfiles = new HashMap<>();
+        notProtectPlace = new ArrayList<>();
+        
         config = new Config(this);
         
         protectStatus = true;
