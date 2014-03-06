@@ -32,37 +32,34 @@ public class YAPSCommands extends Util implements CommandExecutor {
         Info info = new Info(plugin);
         Teleport teleport = new Teleport(plugin);
         
+        // Area Command
         avaibleCommands.put("d", define);
         avaibleCommands.put("define", define);
-        
         avaibleCommands.put("dl", delete);
         avaibleCommands.put("delete", delete);
-        
-        avaibleCommands.put("h", help);
-        avaibleCommands.put("?", help);
-        avaibleCommands.put("help", help);
-        
-        avaibleCommands.put("listp", new ListProtectedBlocks(plugin));
-        
-        avaibleCommands.put("list", list);
-        avaibleCommands.put("l", list);
-        
         avaibleCommands.put("w",wand);
         avaibleCommands.put("wand", wand);
+        avaibleCommands.put("list", list);
+        avaibleCommands.put("l", list);
+        avaibleCommands.put("tp", teleport);
+        avaibleCommands.put("teleport", teleport);        
+        avaibleCommands.put("i", info);
+        avaibleCommands.put("info", info);
         
+        // Block Command
+        avaibleCommands.put("listp", new ListProtectedBlocks(plugin));
         avaibleCommands.put("on", new On(plugin));
         avaibleCommands.put("off", new Off(plugin));
         
-        avaibleCommands.put("i", info);
-        avaibleCommands.put("info", info);
+        // Communs
+        avaibleCommands.put("h", help);
+        avaibleCommands.put("?", help);
+        avaibleCommands.put("help", help);
         
         avaibleCommands.put("purge", new Purge(plugin));
         
         avaibleCommands.put("reload", new Reload(plugin));
         avaibleCommands.put("update", new Update(plugin));
-        
-        avaibleCommands.put("tp", teleport);
-        avaibleCommands.put("teleport", teleport);
         
     }
 
