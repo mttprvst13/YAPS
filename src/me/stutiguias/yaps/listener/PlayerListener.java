@@ -10,6 +10,7 @@ import me.stutiguias.yaps.model.Area;
 import me.stutiguias.yaps.model.BlockProtected;
 import me.stutiguias.yaps.model.Save;
 import org.bukkit.Location;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
