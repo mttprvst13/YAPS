@@ -57,6 +57,7 @@ public class PlayerListener extends Util implements Listener {
 
         if(!isValidEvent(area,player, location,"place")) {
             if(plugin.hasPermission(player,"yaps.bypass")) return;
+            player.sendMessage(ChatColor.RED + "Sorry! " + ChatColor.GRAY + "You cannot build there.");
             event.setCancelled(true);
         }
     }
