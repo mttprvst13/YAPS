@@ -48,6 +48,12 @@ AllowProtectedBlockInsideArea: false
 # if allow all player to move inside area of others players
 AllowMoveInside: true
 
+# The ID of the wand (Stick = 280, Wooden axe = 271)
+WandID: 280
+
+# The ID of the info wand (Stick = 280, Wooden axe = 271)
+InfoWandID: 271
+
 # Protected Block - Blocks only owner can destroy ( and admin bypass )
 Protected:
 - '1'
