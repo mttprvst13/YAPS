@@ -1,0 +1,66 @@
+name: "YAPS"
+version: 0.5
+author: "Stutiguias"
+main: "me.stutiguias.yaps.init.Yaps"
+commands:
+  yaps:
+    description: "§bcommands"
+permissions:
+     yaps.update:
+        description: Allow update
+        default: op
+     yaps.define:
+        description: Allow setspawn
+        default: op
+     yaps.delete:
+        description: Allow delspawn
+        default: op       
+     yaps.reload:
+        description: Allow reload
+        default: op     
+     yaps.wand:
+        description: Allow wand
+        default: op            
+     yaps.sign:
+        description: Allow sign
+        default: op
+     yaps.tp:
+        description: Allow tp
+        default: op                 
+     yaps.info:
+        description: Allow info
+        default: op               
+     yaps.list:
+        description: Allow list
+        default: op    
+     yaps.bypass:
+        description: Bypass for admin
+        default: op  
+     yaps.setexit:
+        description: Allow set exit
+        default: op          
+     yaps.onoff:
+        description: Allow set exit
+        default: op      
+     yaps.listprotectionblocks:
+        description: Allow set exit
+        default: op   
+     yaps.purge:
+        description: Allow purge
+        default: op    
+     yaps.admin:
+      description: Gives access to all YAPS commands
+      children:
+        yaps.update: true
+        yaps.define: true
+        yaps.delete: true
+        yaps.reload: true
+        yaps.wand: true
+        yaps.sign: true
+        yaps.tp: true
+        yaps.info: true
+        yaps.list: true
+        yaps.bypass: true
+        yaps.onoff: true
+        yaps.listprotectionblocks: true
+        yaps.purge: true
